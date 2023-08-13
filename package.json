@@ -31,12 +31,14 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "crypto": "^1.0.1",
+    "iconv-lite": "^0.6.3",
     "luxon": "^3.4.0",
     "mysql2": "^3.6.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.17",
-    "typeorm-naming-strategy": "^2.0.3"
+    "typeorm-naming-strategy": "^2.0.3",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
