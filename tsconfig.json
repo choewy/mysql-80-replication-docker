@@ -22,7 +22,8 @@
       "@core/*": ["src/core/*"],
       "@secret/*": ["src/secret/*"],
       "@database/*": ["src/database/*"],
-      "@api-key/*": ["src/api-key/*"],
+      "@version/*": ["src/version/*"],
+      "@apis/*": ["src/apis/*"],
       "@*": ["src/*"]
     }
   }
