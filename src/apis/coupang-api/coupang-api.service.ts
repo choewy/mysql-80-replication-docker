@@ -7,6 +7,7 @@ import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { ApiKeyPlatform, ShoppingCategoryRepository } from '@database';
 import { ApiBaseCredentials, ApiKeyService } from '@apis/api-key';
 import { CoupangApiResponse, CoupangShoppingCategory } from './classes';
+import { CoupangShoppingCategoryStatus } from './enums';
 
 @Injectable()
 export class CoupangApiService implements OnApplicationBootstrap {
@@ -50,8 +51,10 @@ export class CoupangApiService implements OnApplicationBootstrap {
       conflictPaths: { platform: true, id: true },
     });
 
-    const branches = plainToInstance(CoupangShoppingCategory, category.child || []);
     const nextDepth = depth + 1;
+    const branches = plainToInstance(CoupangShoppingCategory, category.child || []).filter(
+      (r) => r.status === CoupangShoppingCategoryStatus.ACTIVE,
+    );
 
     for (const branch of branches) {
       await this.saveShoppingCategoriesRecursive(branch, category.displayItemCategoryCode, nextDepth);
@@ -65,7 +68,7 @@ export class CoupangApiService implements OnApplicationBootstrap {
     await this.saveShoppingCategoriesRecursive(category, 0, 1);
   }
 
-  async getShoppingCategories() {
+  async getShoppingCategories(): Promise<CoupangApiResponse<CoupangShoppingCategory>> {
     const url = 'https://api-gateway.coupang.com';
     const path = '/v2/providers/seller_api/apis/api/v1/marketplace/meta/display-categories';
 
