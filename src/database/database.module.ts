@@ -1,10 +1,12 @@
-import { Module, Provider, forwardRef } from '@nestjs/common';
+import { Module, Provider } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { SecretModule, TypeOrmSecret } from '@secret';
-import { ApiKeyRepository, VersionRepository } from './repositories';
+import { ApiKeyRepository, ShoppingCategoryRepository, VersionRepository } from './repositories';
 
-const repositories: Provider[] = [VersionRepository, ApiKeyRepository].map((r) => r.provider);
+const repositories: Provider[] = [VersionRepository, ApiKeyRepository, ShoppingCategoryRepository].map(
+  (r) => r.provider,
+);
 
 @Module({
   imports: [
@@ -20,4 +22,3 @@ const repositories: Provider[] = [VersionRepository, ApiKeyRepository].map((r) =
   exports: repositories,
 })
 export class DatabaseModule {}
-export const DatabaseModuleRef = forwardRef(() => DatabaseModule);

@@ -4,7 +4,7 @@ import { VersionController } from './version.controller';
 import { VersionService } from './version.service';
 
 @Module({
-  imports: [DatabaseModuleRef],
+  imports: [DatabaseModuleRef.DatabaseModule],
   controllers: [VersionController],
   providers: [VersionService],
   exports: [VersionService],
